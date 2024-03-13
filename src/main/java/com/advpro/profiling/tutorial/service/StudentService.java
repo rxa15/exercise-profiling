@@ -57,10 +57,18 @@ public class StudentService {
 
     public String joinStudentNames() {
         List<Student> students = studentRepository.findAll();
-        String result = "";
+
+        StringBuilder result = new StringBuilder();
+        String coma = ", ";
+
         for (Student student : students) {
-            result += student.getName() + ", ";
+            result.append(student.getName()).append(coma);
         }
-        return result.substring(0, result.length() - 2);
+
+        if (!students.isEmpty()) {
+            result.setLength(result.length() - 2);
+        }
+
+        return result.toString();
     }
 }
